@@ -1,0 +1,49 @@
+<% include partials/headeradmin %>
+<div class="ui container blog  main text container big  segment">
+<h1 class="center">Edit panel for Southwest Missouri Reptiles</h1>
+</div>
+<div class="ui container blog  main text container inverted segment">
+    <div class="ui stackable flex 5 column grid centered">
+        <form>
+      <a class="ui huge button inverted green" href="/snake/admin/new"><div class="column">Add a Snake</div></a>
+      </form>
+      <form>
+      <a class="ui huge button inverted blue" href="/snake/admin"><div class="column">Back to Cpanel</div></a>
+      </form>
+           <form id="delete" action="/snake/<%=snakes._id%>?_method=DELETE" method="POST">
+        <button class="ui huge inverted button red">DELETE</button>
+    </form>
+    </div>
+</div>
+    
+    <div class="ui main text container big inverted form segment">
+    <div class="ui huge header">Edit this: <%=snakes.type%></div>
+          <form class="ui big form"action="/snake/<%=snakes._id%>?_method=PUT" method="post">
+            <div class="field">
+                <label>Type of snake</label>
+                <input type="text" name="snake[type]" pattern=".{3,}" required value="<%=snakes.type%>"  ></input>
+            </div>
+            <div class="field">
+                <label>Price of snake</label>
+                <input type="text" name="snake[price]" pattern=".{3,}" required value="<%=snakes.price%>" ></input>
+            </div>
+            <div class="field">
+                <label>Image of snake</label>
+                <sub>Paste the url to your image here</sub>
+                <input type="text" name="snake[image]" value="<%=snakes.image%>" ></input>
+            </div>
+            <div class="field">
+                <label>Inventory of snake</label>
+                <input type="text" name="snake[inventory]" pattern=".{1,}" required value="<%=snakes.inventory%>" ></input>
+            </div>
+            <div class="field">
+                <label>Discription of the snake</label>
+                <textarea name="snake[discrip]" pattern=".{3,}" wrap="soft" required ><%=snakes.discrip%></textarea>
+            </div>
+            
+            <button class="ui inverted big button green" type="submit">Add to site</button>
+        </form>
+    </div>
+</div>
+    
+<% include partials/footer %>

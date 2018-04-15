@@ -1,0 +1,27 @@
+<% include partials/headeradmin %>
+<div class="ui container blog  main text container big  segment">
+<h1 class="center">Controle panel for Southwest Missouri Reptiles</h1>
+</div>
+<div class="ui container blog  main text container inverted segment">
+    <div class="ui stackable flex 5 column grid centered">
+      <a class="ui huge button inverted green" href="/snake/admin/new"><div class="column">Add a Snake</div></a>
+      <a class="ui huge button inverted red disabled" href="/snake/admin/delete"><div class="column">Remove a Snake</div></a>
+    </div>
+</div>
+<div class="ui six doubling cards container centered">
+    <%snakes.forEach(function(snakes){%>
+      <div class="card">
+    <div class="image">
+      <img class="ui rounded"src="<%=snakes.image%>">
+    </div>
+    <div class="content">
+        <%=snakes.discrip%>
+    </div>
+    <div class="extra">
+      Price: $<%=snakes.price%>
+    </div>
+    <a class="ui huge button inverted blue" href="/snake/<%=snakes._id%>/edit"><div class="column">Edit Snake</div></a>
+        </div>
+    <% }); %>
+</div>
+<% include partials/footer %>

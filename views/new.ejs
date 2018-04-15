@@ -1,0 +1,33 @@
+<%include partials/headeradmin%>
+<div class="ui container main text inverted olive segment">
+    <h1>Add a Snake for sale</h1>
+    </div>
+    
+    <div class="ui main text container big inverted form segment">
+            <form class="ui big form"action="/snake" method="post">
+            <div class="field">
+                <label>Type of snake</label>
+                <input type="text" name="snake[type]" pattern=".{3,}" required ></input>
+            </div>
+            <div class="field">
+                <label>Price of snake</label>
+                <input type="text" name="snake[price]" pattern=".{3,}" required ></input>
+            </div>
+            <div class="field">
+                <label>Image of snake</label>
+                <sub>Paste the url to your image here</sub>
+                <input type="text" name="snake[image]" ></input>
+            </div>
+            <div class="field">
+                <label>Inventory of snake</label>
+                <input type="text" name="snake[inventory]" pattern=".{1,}" required ></input>
+            </div>
+            <div class="field">
+                <label>Discription of the snake</label>
+                <textarea name="snake[discrip]" pattern=".{3,}" wrap="soft" required ></textarea>
+            </div>
+            
+            <button class="ui inverted big button green" type="submit">Add to site</button>
+        </form>
+    </div>
+<%include partials/footer%>
