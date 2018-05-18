@@ -16,7 +16,7 @@ const
             if (err){
                 res.redirect("error");
             }else{
-                res.render("snakes", {snakes: snakes});
+                res.render("client/snakes", {snakes: snakes});
             }
         });
     });
@@ -27,7 +27,7 @@ const
                 res.render("error");
             }
             else{
-                res.render("buy", {snakes: foundSnake});
+                res.render("client/buy", {snakes: foundSnake});
             }
         });
      });

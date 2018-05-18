@@ -1,23 +1,71 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-            <link rel="shortcut icon" href="">
-            
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css" >
-            <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Lobster" rel="stylesheet">
-            <link href="/css/style.css" rel="stylesheet" type="text/css">
-                   <title>Southwest MO Reptiles</title>
+      
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>SwMOReptiles.com</title>
+        <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
+        <link type="text/css" rel="stylesheet" href="/css/style.css" >
     </head>
-        <body>
-            <div class="ui" id="bottom">
-                <div class="ui grey huge fixed menu inverted borderless padded">
-                    <div class="ui container">
-                      <a href="/snake"class="item"> Home </a>
-                      <a href="/snake"class="item"> Snakes </a>
-                      <a href="#"class="item"> Snake Care </a>
-                      <!--<a class="ui fitted item"> My Account </a>-->
-                    </div>
-                </div>    
-                        
-            </div>
+    <body>
+      <div class="jumbotron bg-dark">
+        <div class="row">
+          <div class="col-md-6" id="">
+            test
+          </div>
+        </div>
+      </div>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark font bordergreen">
+  <div class="container">
+    <a class="navbar-brand" href="/">SWMOReptiles</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <%if (!currentUser){%>
+        <li class="nav-item">
+          <a class="nav-link" href="/">Our Story</a>
+        </li>
+                <li class="nav-item">
+          <a class="nav-link" href="/snake">Shop</a>
+        </li>
+                <li class="nav-item">
+          <a class="nav-link" href="/videos">Videos</a>
+        </li>
+        
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/signup">Sign up</a>
+        </li>
+        </ul>
+          <!--<% } if (current user && currentUser.isAdmin) {%>-->
+
+          
+          
+          
+          
+          <% } else { %>
+          <ul>
+        <li class="nav-item">
+          <a class="nav-link" href="/snake">Home</a>
+        </li>
+        <li class="nav-item">
+         <a class="nav-link" href="">Welcome: <%= currentUser.username%></a>
+        </li> 
+        <li class="nav-item ml-auto">
+          <a class="nav-link" href="/logout">Logout</a>
+        </li>
+        </ul>
+        <% } %>
+
+      </ul>
+    </div>
+  </div>  
+</nav>

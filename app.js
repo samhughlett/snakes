@@ -7,14 +7,10 @@ const
     mongoose        = require("mongoose"),
     bodyParser      = require("body-parser"),
     Snake           = require("./models/snakes"),
-    // User            = require("./models/user"),
+    User            = require("./models/user"),
     passport        = require("passport"),
     LocalStrategy   = require("passport-local");
 //=================================================
-const // required routes
-    adminRoutes = require("./routes/admin");    
-    app.use(adminRoutes);
-
 
 //################## Site  Set Up #################  
     app.set("view engine", "ejs");
@@ -40,92 +36,13 @@ const // required routes
 
 //landing page
 app.get("/", function(req, res){
-    res.render("index")
+    res.render("client/index");
 });
-
-//Home page all snakes shown
-app.get("/snake", function(req, res){
-    Snake.find({}, function(err, snakes){
-        if (err){
-            res.redirect("error");
-        }else{
-            res.render("snakes", {snakes: snakes})
-        }
-    })
-});
-
-
-app.get("/snake/admin/new", function(req, res){
-    res.render("new");
-});
-
-app.get("/snake/admin", function(req, res){
-        Snake.find({}, function(err, snakes){
-        if (err){
-            res.redirect("error");
-        }else{
-            res.render("admin", {snakes: snakes})
-        }
-    })
-});
-
-//Inventory Page
- app.get("/snake/:id", function(req, res){
-    Snake.findById(req.params.id, function(err, foundSnake){
-        if (err){
-            res.render("error")
-        }
-        else{
-            res.render("buy", {snakes: foundSnake});
-        }
-    })
- });
-// DELETE ITEMS
- app.delete("/snake/:id", function(req, res){
-     console.log("delete hit")
-    Snake.findByIdAndRemove(req.params.id, function(err){
-     if(err){
-         res.render("error")
-     }else{
-         res.redirect("/snake/admin")
-     }
-    });
-  })
-
-
-//#####################  Post Table  #####################
-// creates a new post
- app.post("/snake", function(req, res){
-     Snake.create(req.body.snake, function(err, newSnake){
-         if (err){
-             res.redirect("/");
-         }else{
-             res.redirect("/snake/admin");
-         }
-     });
- });
-//############################### edit a post ############
-app.get("/snake/:id/edit", function(req, res){
-    Snake.findById(req.params.id, function(err, foundSnake){
-        if (err){
-            res.render("error")
-        }else{
-            res.render("edit", {snakes: foundSnake});
-        }
-    });
-})
-app.put("/snake/:id", function(req, res){
-    Snake.findByIdAndUpdate(req.params.id, req.body.snake, function(err, updatedSnake){
-        if (err){
-            res.render("error");
-        }else{
-            res.redirect("/snake/admin");
-        }
-    })
-
-});
-
-
+const   
+    adminRoutes      = require("./routes/admin"),
+    clientRoutes    = require("./routes/client");
+    app.use(adminRoutes);
+    app.use(clientRoutes);
 //#####################  dont edit below ##################
 app.listen(process.env.PORT, process.env.IP, function(){
    console.log("dont let this slither away"); 

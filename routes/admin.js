@@ -6,11 +6,14 @@ const
     express         = require("express"),
     router          = express.Router(),
     mongoose        = require("mongoose"),
-    Snake           = require("../models/snakes");
+    passport        = require("passport"),    
+    Snake           = require("../models/snakes"),
+    User            = require("../models/user");
 //==========================================
 //            actual admin routes
 //==========================================
-router.get("/snake/admin/new", loggedIn, function(req, res){
+
+router.get("/snake/new", loggedIn, function(req, res){
     res.render("new");
 });
 
@@ -23,6 +26,47 @@ router.get("/snake/admin", loggedIn, function(req, res){
         }
     });
 });
+//==========================================
+//          Login/Logout ROUTES
+//==========================================
+router.get("/login", function(req, res){
+    res.render("client/login");
+});
+router.post("/login", passport.authenticate("local", 
+    { 
+        successRedirect: '/admin', 
+        failureRedirect: '/login' 
+    }), function(req, res){});
+
+router.get("/logout", function(req, res) {
+    req.logout();
+    res.redirect("/snake");
+});
+
+//==========================================
+//          Sign up ROUTES
+//==========================================
+
+router.get("/signup", function(req, res){
+  res.render("client/signup");
+});
+
+router.post("/signup", function(req, res){
+    req.body.username;
+    req.body.password;
+    var newUser= new User({username: req.body.username});
+    User.register(newUser, req.body.password, function(err, user){
+        if(err){
+            console.log(err)
+            return res.render("error");
+            }
+        passport.authenticate("local")(req, res, function(){
+           return res.redirect("/snake");
+            });
+            console.log("username is: "+req.body.username);
+            console.log("password is: "+req.body.password);
+        });
+    });
 //==========================================
 //              EDIT ROUTES 
 //===========================================
