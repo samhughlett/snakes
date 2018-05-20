@@ -8,37 +8,59 @@ const
     mongoose        = require("mongoose"),
     passport        = require("passport"),    
     Snake           = require("../models/snakes"),
-    User            = require("../models/user");
+    User            = require("../models/user"),
+    multer          = require('multer'),
+    storage         = multer.diskStorage({
+  filename: function(req, file, callback) {
+    callback(null, Date.now() + file.originalname);
+  }
+}),
+ imageFilter = function (req, file, cb) {
+    // accept image files only
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+        return cb(new Error('Only image files are allowed!'), false);
+    }
+    cb(null, true);
+},
+ upload = multer({ storage: storage, fileFilter: imageFilter}),
+
+cloudinary = require('cloudinary');
+    cloudinary.config({ 
+      cloud_name: 'backbonewebdev', 
+      api_key: process.env.CLOUDINARY_API_KEY, 
+      api_secret: process.env.CLOUDINARY_API_SECRET
+    });
+
 //==========================================
 //            actual admin routes
 //==========================================
 
-router.get("/snake/new", loggedIn, function(req, res){
-    res.render("new");
+router.get("/snake/admin/new", function(req, res){
+    res.render("admin/new");
 });
 
-router.get("/snake/admin", loggedIn, function(req, res){
+router.get("/snake/admin", function(req, res){
         Snake.find({}, function(err, snakes){
         if (err){
             res.redirect("error");
         }else{
-            res.render("admin", {snakes: snakes});
+            res.render("admin/admin", {snakes: snakes});
         }
     });
 });
 //==========================================
 //          Login/Logout ROUTES
 //==========================================
-router.get("/login", function(req, res){
+router.get("/snake/login", function(req, res){
     res.render("client/login");
 });
-router.post("/login", passport.authenticate("local", 
+router.post("/snake/login", passport.authenticate("local", 
     { 
-        successRedirect: '/admin', 
+        successRedirect: '/snake', 
         failureRedirect: '/login' 
     }), function(req, res){});
 
-router.get("/logout", function(req, res) {
+router.get("/snake/logout", function(req, res) {
     req.logout();
     res.redirect("/snake");
 });
@@ -47,35 +69,33 @@ router.get("/logout", function(req, res) {
 //          Sign up ROUTES
 //==========================================
 
-router.get("/signup", function(req, res){
+router.get("/snake/signup", function(req, res){
   res.render("client/signup");
 });
 
-router.post("/signup", function(req, res){
+router.post("/snake/signup", function(req, res){
     req.body.username;
     req.body.password;
-    var newUser= new User({username: req.body.username});
+    var newUser= new User({username: req.body.username, email: req.body.email});
     User.register(newUser, req.body.password, function(err, user){
         if(err){
-            console.log(err)
+            console.log(err);
             return res.render("error");
             }
         passport.authenticate("local")(req, res, function(){
            return res.redirect("/snake");
             });
-            console.log("username is: "+req.body.username);
-            console.log("password is: "+req.body.password);
         });
     });
 //==========================================
 //              EDIT ROUTES 
 //===========================================
-router.get("/snake/:id/admin/edit", loggedIn, function(req, res){
+router.get("/snake/:id/edit", loggedIn, function(req, res){
     Snake.findById(req.params.id, function(err, foundSnake){
         if (err){
             res.render("error");
         }else{
-            res.render("edit", {snakes: foundSnake});
+            res.render("admin/edit", {snakes: foundSnake});
         }
     });
 });
@@ -92,7 +112,7 @@ router.put("/snake/:id", loggedIn, function(req, res){
 //==========================================================
 //                      POST ROUTES
 //==========================================================
- router.post("/snake", loggedIn, function(req, res){
+ router.post("/snake",  function(req, res){
      Snake.create(req.body.snake, function(err, newSnake){
          if (err){
              res.redirect("/");
@@ -122,7 +142,7 @@ function loggedIn(req, res, next){
     if(req.isAuthenticated()){
         return next();
     } 
-    res.redirect("/login");
+    res.redirect("/snake/login");
 }
 
 module.exports = router;

@@ -12,8 +12,7 @@ const  snakeSchema  = new mongoose.Schema({
         discrip: String,
         image:   String,
         price: String,
-        inventory: Number,
-        
+        sex: String
     });
 
 module.exports = mongoose.model("Snake", snakeSchema);

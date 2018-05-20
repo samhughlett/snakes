@@ -1,33 +1,40 @@
-<%include partials/headeradmin%>
-<div class="ui container main text inverted olive segment">
-    <h1>Add a Snake for sale</h1>
+<%include ../partials/header%>
+<div class="container center">
+    <div class="center">
+        <h1 class="text-success bg-dark">Add a Snake for sale</h1>
     </div>
-    
-    <div class="ui main text container big inverted form segment">
-            <form class="ui big form"action="/snake" method="post">
-            <div class="field">
-                <label>Type of snake</label>
-                <input type="text" name="snake[type]" pattern=".{3,}" required ></input>
+        
+<div class="card well bg-dark text-success font1">
+    <form class="center container"action="/snake" method="post"enctype="multipart/form-data">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="snake[type]">Type of snake</label>
+                <input type="text" class="form-control" name="snake[type]" pattern=".{3,}" required ></input>
             </div>
-            <div class="field">
-                <label>Price of snake</label>
-                <input type="text" name="snake[price]" pattern=".{3,}" required ></input>
+            <div class="form-group col-md-6">
+                <label for="snake[price]">Price of snake</label>
+                <input type="text" class="form-control" name="snake[price]" pattern=".{3,}" required ></input>
             </div>
-            <div class="field">
-                <label>Image of snake</label>
-                <sub>Paste the url to your image here</sub>
-                <input type="text" name="snake[image]" ></input>
+            <div class="form-group col-md-6">
+                <label for="image">Image of snake</label>
+                <input type="file" class="form-control" id="image" name="image" accept="image/*"></input>
             </div>
-            <div class="field">
-                <label>Inventory of snake</label>
-                <input type="text" name="snake[inventory]" pattern=".{1,}" required ></input>
+            <div class="form-group col-md-6">
+                <label>sex of snake</label>
+                <select name="snake[sex]" class="form-control" pattern=".{1,}" required >
+                    <option selected>Choose...</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                </select>
             </div>
-            <div class="field">
-                <label>Discription of the snake</label>
-                <textarea name="snake[discrip]" pattern=".{3,}" wrap="soft" required ></textarea>
+            <div class="form-group col-md-12">
+                <label for="snake[discrip]">Discription of the snake</label>
+                <textarea name="snake[discrip]" class="form-control"  pattern=".{3,}" wrap="soft" required ></textarea>
             </div>
-            
-            <button class="ui inverted big button green" type="submit">Add to site</button>
-        </form>
-    </div>
-<%include partials/footer%>
+                <button class="btn btn-success center" type="submit">Add to site</button>
+        </div>
+    </form>
+        
+
+</div>
+<%include ../partials/footer%>

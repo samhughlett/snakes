@@ -11,6 +11,10 @@ const
 //          CLIENT VIEWABLE ROUTES
 //==========================================
 
+    router.get("/aboutus", function(req, res){
+        res.render("client/aboutus")
+    });
+
     router.get("/snake", function(req, res){
         Snake.find({}, function(err, snakes){
             if (err){

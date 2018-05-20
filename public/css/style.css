@@ -1,7 +1,19 @@
+html {
+  overflow-y: scroll;
+}
 body{
     background-color: darkgray;
     height:100%;
     width: 100%;
+}
+.rocksalt{
+    font-family: 'Rock Salt', cursive;
+}
+.font1{
+    font-family: 'Ubuntu Mono', monospace;
+}
+.fontbold{
+    font-weight: bold;
 }
 .center{
     text-align: center;
@@ -16,27 +28,56 @@ body{
 .card{
    background-color: white;
 }
-.jumbotron, .nav{
-    background-color: rgba( 102, 124, 116, .5 ) !important;
+.jumbotron{
+    background-color: rgba( 102, 153, 0, 1 ) !important;
+    margin-bottom: 0px;
+    border-radius:0px;
+    min-height: 250px;
 }
-/* change the background color */
+.shippingCost {
+    background-color: rgba(51, 102, 50, .2);
+    border-radius: 15px;
+    border:1px solid rgba(51, 102, 50, .5);
+}
+/*        Custom nav bar colors         */
 .navbar-custom {
-    background-color: #ff5500;
+    background-color: rgba(51, 102, 0, 1);
+}
+.navbar-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+.navbar-toggler-icon{
+  border-color: rgba(0, 0, 0, 0);
 }
 /* change the brand and text color */
 .navbar-custom .navbar-brand,
 .navbar-custom .navbar-text {
-    color: rgba(255,255,255,.8);
+    color: rgb(0, 51, 0);
 }
+
 /* change the link color */
 .navbar-custom .navbar-nav .nav-link {
-    color: rgba(255,255,255,.5);
+    color: rgb(0, 51, 0);
 }
+
 /* change the color of active or hovered links */
 .navbar-custom .nav-item.active .nav-link,
 .navbar-custom .nav-item:hover .nav-link {
     color: #ffffff;
 }
-.center{
-    margin: 0 auto;
+
+/* for dropdown only - change the color of dropdown */
+.navbar-custom .dropdown-menu {
+    background-color: #ff5500;
+}
+.navbar-custom .dropdown-item {
+    color: #ffffff;
+}
+.navbar-custom .dropdown-item:hover,
+.navbar-custom .dropdown-item:focus {
+    color: #333333;
+    background-color: rgba(255,255,255,.5);
+}
+.bottomGutter{
+ margin-bottom: 15px;   
 }

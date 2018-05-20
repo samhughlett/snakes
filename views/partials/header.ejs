@@ -7,65 +7,95 @@
         <title>SwMOReptiles.com</title>
         <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
         <link type="text/css" rel="stylesheet" href="/css/style.css" >
+        <link href="https://fonts.googleapis.com/css?family=Rock+Salt | Ubuntu+Mono" rel="stylesheet">
     </head>
     <body>
-      <div class="jumbotron bg-dark">
-        <div class="row">
-          <div class="col-md-6" id="">
-            test
+  <div class="jumbotron bg-dark">
+    <div class="row">
+      <div class="col-md-6 ml-auto">
+        <% if(!currentUser){%>
+        <h1 class="center">Welcome to SWMOReptiles.</h1>
+        <% }else{%>
+          <h1 class="center">Logged in as: <%= currentUser.username%></h1>
+            <div class="row">
+          <div class="col-md-12">
+            <%if(!currentUser.isAdmin){%>
+             <h3 class="center">Welcome Back</h3>
+            <% }else{ %>
+              <h3 class="center">User role: Admin</h3>
+            <% } %>
+            <h3></h3>
           </div>
         </div>
-      </div>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark font bordergreen">
-  <div class="container">
-    <a class="navbar-brand" href="/">SWMOReptiles</a>
+        <% }%>
+     </div>
+    </div>
+  </div>
+      <nav class="navbar navbar-expand-lg navbar-custom rocksalt fontbold bottomGutter">
+  <div class="container ">
+    <a class="navbar-brand" href="/snake/admin">SWMOReptiles</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <%if (!currentUser){%>
+    <ul class="navbar-nav mr-auto">
+      <%if (!currentUser || !currentUser.isAdmin){ %>
         <li class="nav-item">
-          <a class="nav-link" href="/">Our Story</a>
+          <a class="nav-link" href="/aboutus">About us</a>
         </li>
-                <li class="nav-item">
-          <a class="nav-link" href="/snake">Shop</a>
-        </li>
-                <li class="nav-item">
-          <a class="nav-link" href="/videos">Videos</a>
-        </li>
-        
+        <li class="nav-item">
+          <a class="nav-link" href="/snake">Store</a>
+        </li> 
         </ul>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-          <a class="nav-link" href="/login">Login</a>
+          <a class="nav-link" href="/snake/login">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/signup">Sign up</a>
+          <a class="nav-link" href="/snake/signup">Sign up</a>
         </li>
-        </ul>
-          <!--<% } if (current user && currentUser.isAdmin) {%>-->
-
-          
-          
-          
-          
-          <% } else { %>
-          <ul>
-        <li class="nav-item">
-          <a class="nav-link" href="/snake">Home</a>
-        </li>
-        <li class="nav-item">
-         <a class="nav-link" href="">Welcome: <%= currentUser.username%></a>
-        </li> 
-        <li class="nav-item ml-auto">
-          <a class="nav-link" href="/logout">Logout</a>
-        </li>
-        </ul>
-        <% } %>
-
       </ul>
+         <% } if (currentUser) { %>
+<ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/aboutus">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/snake">Store</a>
+        </li> 
+         <li class="nav-item">
+          <a class="nav-link" href="/videos">Videos</a>
+        </li>
+      </ul>
+        <ul class="navbar-nav ml-auto">
+        <!--<li class="nav-item">-->
+        <!-- <a class="nav-link" href="">Logged in as: <%= currentUser.username%></a>-->
+        <!--</li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="/snake/logout">Logout</a>
+        </li>
+        </ul>
+      <% } if (currentUser.isAdmin){ %>
+        <li class="nav-item">
+          <a class="nav-link" href="/aboutus">About us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/snake">Store</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/videos">Videos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/snake/admin/new">admin</a>
+        </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/snake/logout">Logout</a>
+        </li>
+        </ul>
+      <% } %>
     </div>
-  </div>  
+  </div>
 </nav>
