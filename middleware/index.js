@@ -1,12 +1,13 @@
+
 module.exports = {
         loggedIn: function(req, res, next){
         if (req.isAuthenticated()){
             return next();
         }
-        res.render("/snakes/login");
+        res.redirect("/snake/login");
         },
         adminCheck: function(req, res, next){
-        if (req.isAuthenticated && req.user.isAdmin){
+        if (req.isAuthenticated && req.users.isAdmin === true){
             next();}
         }   
 };

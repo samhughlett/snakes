@@ -1,27 +1,29 @@
 <% include ../partials/header %>
-<div class="ui container blog  main text container big  segment">
-<h1 class="center">Control panel for Southwest Missouri Reptiles</h1>
-</div>
-<div class="ui container blog  main text container inverted segment">
-    <div class="ui stackable flex 5 column grid centered">
-      <a class="ui huge button inverted green" href="/snake/admin/new"><div class="column">Add a Snake</div></a>
-      <a class="ui huge button inverted red disabled" href="/snake/admin/delete"><div class="column">Remove a Snake</div></a>
+<% if (currentUser.isAdmin){%>
+
+<h1 class="center bottomGutter">Control panel for Southwest Missouri Reptiles</h1>
+
+<div class="row container center bottomGutter">
+    <div class="col-md-12 bottomGutter">
+      <a class="btn btn-blk btn-success" href="/snake/admin/new"><div class="column">Add a Snake</div></a>
     </div>
 </div>
-<div class="ui six doubling cards container centered">
-    <%snakes.forEach(function(snakes){%>
-      <div class="card">
-    <div class="image">
-      <img class="ui rounded"src="<%=snakes.image%>">
-    </div>
-    <div class="content">
-        <%=snakes.discrip%>
-    </div>
-    <div class="extra">
-      Price: $<%=snakes.price%>
-    </div>
-    <a class="ui huge button inverted blue" href="/snake/<%=snakes._id%>/edit"><div class="column">Edit Snake</div></a>
-        </div>
-    <% }); %>
-</div>
+<div class="row center text-light font1 container">
+    <% snakes.forEach(function(snakes){ %>
+      <div class="col-md-6 flex bottomGutter">
+          <div class="card bg-dark" style="width: 100%; height: 100%;">
+            <div class="card-body">
+              <p><%=snakes.type%></p>
+              <img class="card-img-top text-danger" src="<%=snakes.image%>">
+              <p class="card-text "><%= snakes.discrip%></p>
+              <p>Price: $<%=snakes.price%></p>
+            </div>
+            <a class="btn btn-lg btn-warning" href="/snake/<%=snakes._id%>/edit">Edit Snake</a>
+          </div>
+      </div>
+      <% }); %>
+  </div>
+<% }else{ %>
+    <h1 class="center">Hacker!!!</h1>
+    <% }%>
 <% include ../partials/footer %>

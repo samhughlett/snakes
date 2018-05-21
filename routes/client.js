@@ -1,12 +1,15 @@
-const
+require('dotenv').config();
+
 //==========================================
 //            PAGE REQUIERMENTS
 //==========================================
-
+const
     express         = require("express"),
     router          = express.Router(),
     mongoose        = require("mongoose"),
     Snake           = require("../models/snakes");
+    
+        require('dotenv').config();
 //==========================================
 //          CLIENT VIEWABLE ROUTES
 //==========================================

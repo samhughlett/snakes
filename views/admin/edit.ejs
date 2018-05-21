@@ -1,16 +1,13 @@
-<% include partials/headeradmin %>
-<div class="ui container blog  main text container big  segment">
+<% include ../partials/header %>
+<% if (currentUser.isAdmin){%>
+<div class="shippingCost container">
 <h1 class="center">Edit panel for Southwest Missouri Reptiles</h1>
 </div>
-<div class="ui container blog  main text container inverted segment">
-    <div class="ui stackable flex 5 column grid centered">
-        <form>
-      <a class="ui huge button inverted green" href="/snake/admin/new"><div class="column">Add a Snake</div></a>
-      </form>
-      <form>
-      <a class="ui huge button inverted blue" href="/snake/admin"><div class="column">Back to Cpanel</div></a>
-      </form>
-           <form id="delete" action="/snake/<%=snakes._id%>?_method=DELETE" method="POST">
+<div class="container">
+    <div class="center">
+      <a class="btn btn-blk btn-success" href="/snake/admin/new"><div class="column">Add a Snake</div></a>
+      <a class="btn btn-blk btn-warning" href="/snake/admin"><div class="column">Back to Cpanel</div></a>
+    <form id="delete" action="/snake/<%=snakes._id%>?_method=DELETE" method="POST">
         <button class="ui huge inverted button red">DELETE</button>
     </form>
     </div>
@@ -18,32 +15,38 @@
     
     <div class="ui main text container big inverted form segment">
     <div class="ui huge header">Edit this: <%=snakes.type%></div>
-          <form class="ui big form"action="/snake/<%=snakes._id%>?_method=PUT" method="post">
-            <div class="field">
-                <label>Type of snake</label>
-                <input type="text" name="snake[type]" pattern=".{3,}" required value="<%=snakes.type%>"  ></input>
+          <form class="center container"action="/snake" method="post"enctype="multipart/form-data">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="snake[type]">Type of snake</label>
+                <input type="text" class="form-control" name="snake[type]" pattern=".{3,}" value="<%=snakes.type%>"></input>
             </div>
-            <div class="field">
-                <label>Price of snake</label>
-                <input type="text" name="snake[price]" pattern=".{3,}" required value="<%=snakes.price%>" ></input>
+            <div class="form-group col-md-6">
+                <label for="snake[price]">Price of snake</label>
+                <input type="text" class="form-control" name="snake[price]" pattern=".{3,}"  value="<%=snakes.price%>"></input>
             </div>
-            <div class="field">
-                <label>Image of snake</label>
-                <sub>Paste the url to your image here</sub>
-                <input type="text" name="snake[image]" value="<%=snakes.image%>" ></input>
+            <div class="form-group col-md-6">
+                <label for="image">Image of snake</label>
+                <input type="file" class="form-control" id="image" name="image" accept="image/*" value="<%=snakes.image%>"></input>
             </div>
-            <div class="field">
-                <label>Inventory of snake</label>
-                <input type="text" name="snake[inventory]" pattern=".{1,}" required value="<%=snakes.inventory%>" ></input>
+            <div class="form-group col-md-6">
+                <label>sex of snake</label>
+                <select name="snake[sex]" class="form-control" pattern=".{1,}"  value="snakes.sex">
+                    <option selected><%=snakes.sex%></option>
+                    <option>Male</option>
+                    <option>Female</option>
+                </select>
             </div>
-            <div class="field">
-                <label>Discription of the snake</label>
-                <textarea name="snake[discrip]" pattern=".{3,}" wrap="soft" required ><%=snakes.discrip%></textarea>
+            <div class="form-group col-md-12">
+                <label for="snake[discrip]">Discription of the snake</label>
+                <textarea name="snake[discrip]" class="form-control"  pattern=".{3,}" wrap="soft" ><%=snakes.discrip%></textarea>
             </div>
-            
-            <button class="ui inverted big button green" type="submit">Add to site</button>
-        </form>
+                <button class="btn btn-success center" type="submit">Add to site</button>
+        </div>
+    </form>
     </div>
 </div>
-    
-<% include partials/footer %>
+    <% }else{ %>
+    <h1 class="center">Hacker!!!</h1>
+    <% }%>
+<% include ../partials/footer %>

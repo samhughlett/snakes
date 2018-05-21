@@ -5,7 +5,7 @@
     </div>
         
 <div class="card well bg-dark text-success font1">
-    <form class="center container"action="/snake" method="post"enctype="multipart/form-data">
+    <form class="center container"action="/snake" method="post" enctype="multipart/form-data">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="snake[type]">Type of snake</label>
@@ -17,12 +17,12 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="image">Image of snake</label>
-                <input type="file" class="form-control" id="image" name="image" accept="image/*"></input>
+                <input type="file" class="form-control" id="image" name="image" accept="image/*" required></input>
             </div>
             <div class="form-group col-md-6">
                 <label>sex of snake</label>
                 <select name="snake[sex]" class="form-control" pattern=".{1,}" required >
-                    <option selected>Choose...</option>
+                    <option selected></option>
                     <option>Male</option>
                     <option>Female</option>
                 </select>

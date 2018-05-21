@@ -1,3 +1,4 @@
+require('dotenv').config();
 const
 //################ APP VARS #####################  
 
@@ -19,7 +20,7 @@ const
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(method("_method"));
     app.use(require("express-session")({
-            secret: "Free Camping Is The Best",
+            secret: process.env.SESSION,
             resave: false,
             saveUninitialized: false
         }));
@@ -39,7 +40,7 @@ app.get("/", function(req, res){
     res.render("client/index");
 });
 const   
-    adminRoutes      = require("./routes/admin"),
+    adminRoutes     = require("./routes/admin"),
     clientRoutes    = require("./routes/client");
     app.use(adminRoutes);
     app.use(clientRoutes);

@@ -11,6 +11,7 @@ const  snakeSchema  = new mongoose.Schema({
         type:  String,
         discrip: String,
         image:   String,
+        imageId: String,
         price: String,
         sex: String
     });
