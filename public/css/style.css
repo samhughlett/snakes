@@ -7,7 +7,8 @@ body{
     width: 100%;
 }
 .rocksalt{
-    font-family: 'Rock Salt', cursive;
+    font-family: 'Quando', serif;
+    font-size: 18pt;
 }
 .font1{
     font-family: 'Ubuntu Mono', monospace;
@@ -83,4 +84,7 @@ body{
 }
 #delete{
     float: center;
+}
+#brand{
+    font-size: 1.5em;
 }

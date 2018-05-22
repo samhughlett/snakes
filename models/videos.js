@@ -7,14 +7,9 @@ const
 //==========================================
 //                 SCHEMA
 //==========================================  
-const  snakeSchema  = new mongoose.Schema({
+const  videoSchema  = new mongoose.Schema({
         type:  String,
-        discrip: String,
-        image:   String,
-        imageId: String,
-        price: String,
-        traits: String,
-        sex: String
+        url: String
     });
 
-module.exports = mongoose.model("Snake", snakeSchema);
+module.exports = mongoose.model("Video", videoSchema);

@@ -1,7 +1,8 @@
 require('dotenv').config();
 const
-//################ APP VARS #####################  
-
+//==========================================
+//            PAGE REQUIERMENTS
+//==========================================  
     express         = require("express"), 
     app             = express(),
     method          = require("method-override"),
@@ -9,11 +10,12 @@ const
     bodyParser      = require("body-parser"),
     Snake           = require("./models/snakes"),
     User            = require("./models/user"),
+    Video            = require("./models/videos"),
     passport        = require("passport"),
     LocalStrategy   = require("passport-local");
-//=================================================
-
-//################## Site  Set Up #################  
+//==========================================
+//                  CONFIG
+//==========================================
     app.set("view engine", "ejs");
     mongoose.connect("mongodb://localhost/swmo");
     app.use(express.static(__dirname + '/public'));
@@ -33,7 +35,9 @@ const
             res.locals.currentUser = req.user;
         next();
     });
-//#####################  Routes Table  ###################
+//==========================================
+//                  ROUTES
+//==========================================
 
 //landing page
 app.get("/", function(req, res){
@@ -44,7 +48,9 @@ const
     clientRoutes    = require("./routes/client");
     app.use(adminRoutes);
     app.use(clientRoutes);
-//#####################  dont edit below ##################
+//==========================================
+//          SERVER CONECTION 
+//==========================================
 app.listen(process.env.PORT, process.env.IP, function(){
    console.log("dont let this slither away"); 
 });
