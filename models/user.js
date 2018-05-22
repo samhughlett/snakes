@@ -13,7 +13,7 @@ const
                 email: String,
                 isAdmin: {type: Boolean, default: false},
                 isOwner: {type: Boolean, default:false},
-                favUser: {type: Boolean, default:false}
+                isFavUser: {type: Boolean, default:false}
                 
             });
         UserSchema.plugin(passportLocalMongoose);

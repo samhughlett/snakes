@@ -77,6 +77,26 @@ const middle = require('../middleware');
                 res.render("admin/admin", {snakes: snakes});
             }
         });
+    });    
+    
+    router.get("/snake/admin/users", middle.loggedIn, function(req, res){
+            User.find({}, function(err, users){
+            if (err){
+                res.redirect("error");
+            }else{
+                res.render("admin/users", {users: users});
+            }
+        });
+    });  
+    
+    router.get("/snake/admin/users/:id", middle.loggedIn, function(req, res){
+            User.findById(req.params.id, function(err, users){
+            if (err){
+                res.redirect("error");
+            }else{
+                res.render("admin/profile", {users: users});
+            }
+        });
     });
 
 //==========================================
@@ -91,7 +111,7 @@ const middle = require('../middleware');
             }
         });
     });
-    router.put("/:id", middle.loggedIn, function(req, res){
+    router.put("/snake/:id", middle.loggedIn, function(req, res){
         Snake.findByIdAndUpdate(req.params.id, req.body.snake, function(err, updatedSnake){
             if (err){
                 res.render("error");
@@ -100,6 +120,17 @@ const middle = require('../middleware');
             }
         });
     });
+        
+    router.put("/snake/admin/user/:id", middle.loggedIn, function(req, res){
+        User.findByIdAndUpdate(req.params.id, req.body.user, function(err, updatedUser){
+            if (err){
+                res.render("error");
+            }else{
+                res.redirect("/snake/admin");
+            }
+        });
+    });
+    
 //===========================================
 //              DELETE ROUTES 
 //===========================================

@@ -1,0 +1,15 @@
+<% include ../partials/header %>
+<% if (currentUser.isAdmin){%>
+  <div class="row center container">
+    <%users.forEach(function(users){%>
+        <div class=" col-md-12 bottomGutter">
+            <div class="col-md-6 btn btn-lg btn-dark ">
+                <a class="text-danger" href="/snake/admin/users/<%=users._id%>"><%=users.username%>
+            </div>
+        </div>
+  <% }); %>
+  </div>
+<% }else{ %>
+    <h1 class="center">Hacker!!!</h1>
+    <% }%>
+<% include ../partials/footer %>

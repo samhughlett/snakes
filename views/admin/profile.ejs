@@ -1,0 +1,31 @@
+<% include ../partials/header %>
+<div class="row">
+    <div class="col-md-6 center">
+        
+        <sub>Users Id Number: <%=users._id%></sub>
+        <form action="/snake/signup?_method=PUT" method="POST">
+            <h1 name="username"><%=users.username%></h1>
+            <label for="isAdmin">Has Admin Rights</label>
+            <select name="isAdmin">
+                <option>Is set to <%=users.isAdmin%></option>
+                <option value="true">True</option>
+                <option value="false">False</option>
+            </select>
+            <div class="col-md-6 center">
+            <button>Change Rights?</button>
+            </div>            
+            <label fo="isFavUser">Has Discount Perk</label>
+            <select name="IsFavUser">
+                <option>Is set to <%=users.isFavUser%></option>
+                <option value="true">True</option>
+                <option value="false">False</option>
+            </select>
+            <div class="col-md-6 center">
+            <button>Change Rights?</button>
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+<% include ../partials/footer %>

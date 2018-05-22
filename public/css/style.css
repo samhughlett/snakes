@@ -2,7 +2,7 @@ html {
   overflow-y: scroll;
 }
 body{
-    background-color: darkgray;
+    background-color: #d7cec7;
     height:100%;
     width: 100%;
 }
@@ -30,7 +30,7 @@ body{
    background-color: white;
 }
 .jumbotron{
-    background-color: rgba( 102, 153, 0, 1 ) !important;
+    background-color: #95a5a6 !important;
     margin-bottom: 0px;
     border-radius:0px;
     min-height: 250px;
@@ -42,23 +42,25 @@ body{
 }
 /*        Custom nav bar colors         */
 .navbar-custom {
-    background-color: rgba(51, 102, 0, 1);
+    background-color: #626e60;
 }
 .navbar-toggler .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
 .navbar-toggler-icon{
-  border-color: rgba(0, 0, 0, 0);
+  border-color: #565656;
 }
 /* change the brand and text color */
 .navbar-custom .navbar-brand,
 .navbar-custom .navbar-text {
-    color: rgb(0, 51, 0);
+    color: #000000;
+
 }
 
 /* change the link color */
 .navbar-custom .navbar-nav .nav-link {
-    color: rgb(0, 51, 0);
+    color: #353535;
+ 
 }
 
 /* change the color of active or hovered links */
