@@ -4,18 +4,22 @@ module.exports = {
         if (req.isAuthenticated()){
             return next();
         }
-        res.redirect("/snake/login");
+        res.redirect("/login");
         },
         
         adminCheck: function(req, res, next){
-        if (req.isAuthenticated && req.users.isAdmin === true){
+        if(req.body.user.isAdmin && req.user.isAdmin === true){
             next();}
         },
-        ensureAdminRights: function(req, res, next) { 
-        if(req.body.user.isAdmin && req.user.isAdmin === false) { 
-            req.flash('error', 'Nice try ;)'); 
-            return res.redirect('back'); 
-            } 
+        ownerCheck: function(req, res, next) { 
+        if(req.body.user.isAdmin && req.user.isOwner === ture) { 
+            
+            
+        } else if{
+            
+            
+        } else{
+            
             next(); 
         }
 };

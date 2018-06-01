@@ -1,10 +1,14 @@
-html {
-  overflow-y: scroll;
-}
-body{
-    background-color: #d7cec7;
+
+body, html{
+    background-image: url('/images/30724426_10216011979955505_4197986053988024320_n.png');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto;
     height:100%;
     width: 100%;
+        background-color: black;
+    overflow-y: scroll;
 }
 .rocksalt{
     font-family: 'Quando', serif;
@@ -42,7 +46,7 @@ body{
 }
 /*        Custom nav bar colors         */
 .navbar-custom {
-    background-color: #626e60;
+    background-color: rgba(65, 65, 65, .8);
 }
 .navbar-toggler .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
@@ -59,7 +63,8 @@ body{
 
 /* change the link color */
 .navbar-custom .navbar-nav .nav-link {
-    color: #353535;
+    color: rgb(207, 83, 0);
+    font-weight: bold;
  
 }
 
@@ -89,4 +94,21 @@ body{
 }
 #brand{
     font-size: 1.5em;
+}
+input[type=file]{
+    border-radius: 50px;
+}
+
+.graybg{
+        background-color: 	rgba(128, 128, 128, .9);
+}
+.blackbg{
+        background-color: 	rgba(0, 0, 0, .6);
+}
+.bumper{
+    padding: 10px 8px;
+    border-radius: 15px;
+}
+.roundme{
+    border-radius: 15px;
 }

@@ -56,7 +56,7 @@ const middle = require('../middleware');
             }
             req.body.image = result.secure_url;
             req.body.imageId = result.public_id;
-         Snake.create(req.body.snake, function(err, newSnake){
+         Snake.create(req.body, function(err, newSnake){
              if (err){
                  res.redirect("/");
              }else{
@@ -88,31 +88,43 @@ const middle = require('../middleware');
             }
         });
     });  
-    
-    router.get("/snake/admin/users/:id", middle.loggedIn, function(req, res){
-            User.findById(req.params.id, function(err, users){
-            if (err){
-                res.redirect("error");
-            }else{
-                res.render("admin/profile", {users: users});
-            }
-        });
-    });
-
 //==========================================
 //              EDIT ROUTES 
 //==========================================
-    router.get("/:id/edit", middle.loggedIn, function(req, res){
-        Snake.findById(req.params.id, function(err, foundSnake){
+        
+    router.get("/snake/admin/users/:id", middle.loggedIn, function(req, res){
+            User.findById(req.params.id, function(err, foundUsers){
             if (err){
-                res.render("error");
+                res.redirect("error");
             }else{
+                res.render("admin/profile", {users: foundUsers});
+                console.log(foundUsers);
+            }
+        });
+    });
+    
+    router.get("/snake/:id/edit", middle.loggedIn, function(req, res){
+        Snake.findById(req.params.id, async function(err, foundSnake){
+        if(err){
+            req.flash("error", err.message);
+            res.redirect("back");
+        } else {
+            if (req.file) {
+               try {
+                await cloudinary.v2.uploader.destroy(foundSnake.imageId);
+                         var result = await cloudinary.v2.uploader.upload(req.file.path);
+                        foundSnake.image = result.secure_url;
+                        foundSnake.imageId = result.public_id;
+                    } catch(err) {
+                        return res.redirect("back");
+                    }
+                }
                 res.render("admin/edit", {snakes: foundSnake});
             }
         });
     });
-    router.put("/snake/:id", middle.loggedIn, function(req, res){
-        Snake.findByIdAndUpdate(req.params.id, req.body.snake, function(err, updatedSnake){
+    router.put("/snake/:id", middle.loggedIn, upload.single('image'), function(req, res){
+        Snake.findByIdAndUpdate(req.params.id, req.body, async function(err, updatedSnake){
             if (err){
                 res.render("error");
             }else{
@@ -121,12 +133,17 @@ const middle = require('../middleware');
         });
     });
         
-    router.put("/snake/admin/user/:id", middle.loggedIn, function(req, res){
-        User.findByIdAndUpdate(req.params.id, req.body.user, function(err, updatedUser){
+    router.put("/snake/admin/users/:id", middle.loggedIn, function(req, res){
+        User.findByIdAndUpdate(req.params.id, req.body, function(err, updatedUser){
             if (err){
+                console.log(err);
                 res.render("error");
             }else{
-                res.redirect("/snake/admin");
+                res.render("admin/profile", {users: updatedUser});
+                console.log(req.body);
+                console.log("======================");
+                console.log(updatedUser);
+                console.log("======================");
             }
         });
     });
@@ -134,20 +151,30 @@ const middle = require('../middleware');
 //===========================================
 //              DELETE ROUTES 
 //===========================================
-    router.delete("/:id", middle.loggedIn, function(req, res){
+    router.delete("/snake/:id", middle.loggedIn, function(req, res){
     Snake.findByIdAndRemove(req.params.id, function(err){
      if(err){
+         console.log(err);
          res.render("error");
      }else{
          res.redirect("/snake/admin");
      }
     });
   });
-  
+   router.delete("/snake/admin/users/:id", middle.loggedIn, function(req, res){
+    User.findByIdAndRemove(req.params.id, function(err){
+     if(err){
+         console.log(err);
+         res.render("error");
+     }else{
+         res.redirect("/snake/admin/users");
+     }
+    });
+  });
 //==========================================
 //              VIDEO ROUTES 
 //==========================================
-    router.get
+
 
 
 module.exports = router;

@@ -22,8 +22,11 @@ const
 //==========================================
 //          CLIENT VIEWABLE ROUTES
 //==========================================
-
-    router.get("/snake/aboutus", function(req, res){
+    router.get("/snake/users/:id", function(req, res){
+        res.render("client/profile")
+    });
+    
+    router.get("/aboutus", function(req, res){
         res.render("client/aboutus")
     });
 
@@ -37,7 +40,7 @@ const
         });
     });
 
-    router.get("/:id", function(req, res){
+    router.get("/snake/:id", function(req, res){
         Snake.findById(req.params.id, function(err, foundSnake){
             if (err){
                 res.render("error");
@@ -50,17 +53,17 @@ const
 //==========================================
 //          Login/Logout ROUTES
 //==========================================
-router.get("/snake/login", function(req, res){
+router.get("/login", function(req, res){
     res.render("client/login");
 });
 
 router.post("/snake/login", passport.authenticate("local", 
     { 
         successRedirect: '/snake', 
-        failureRedirect: '/snake/login' 
+        failureRedirect: '/login' 
     }), function(req, res){});
 
-router.get("/snake/logout", middle.loggedIn, function(req, res) {
+router.get("/logout", middle.loggedIn, function(req, res) {
     req.logout();
     res.redirect("/snake");
 });
@@ -69,7 +72,7 @@ router.get("/snake/logout", middle.loggedIn, function(req, res) {
 //          Sign up ROUTES
 //==========================================
 
-router.get("/snake/signup", function(req, res){
+router.get("/signup", function(req, res){
   res.render("client/signup");
 });
 
@@ -77,6 +80,8 @@ router.post("/snake/signup", function(req, res){
     req.body.username;
     req.body.password;
     var newUser = new User({username: req.body.username, email: req.body.email});
+            console.log(req.body.password);
+        console.log(req.body.username);
     User.register(newUser, req.body.password, function(err, user){
         if(err){
             console.log(err);
