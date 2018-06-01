@@ -8,18 +8,20 @@ module.exports = {
         },
         
         adminCheck: function(req, res, next){
-        if(req.body.user.isAdmin && req.user.isAdmin === true){
-            next();}
+        if(req.isAuthenticated() && req.user.isAdmin){
+            next()
+            ;}
         },
+        
         ownerCheck: function(req, res, next) { 
-        if(req.body.user.isAdmin && req.user.isOwner === ture) { 
-            
-            
-        } else if{
-            
+        if(req.body.user.isAdmin && req.user.isOwner) { 
+            next();
+        } else if (req.body.user.isAdmin && !req.user.isOwner) {
+            res.redirect('/snake');
             
         } else{
-            
-            next(); 
+            req.logout();
         }
+        },
 };
+

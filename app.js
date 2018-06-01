@@ -8,9 +8,10 @@ const
     method          = require("method-override"),
     mongoose        = require("mongoose"),
     bodyParser      = require("body-parser"),
+    flash           = require("connect-flash"),
     Snake           = require("./models/snakes"),
     User            = require("./models/user"),
-    Video            = require("./models/videos"),
+    Video           = require("./models/videos"),
     passport        = require("passport"),
     LocalStrategy   = require("passport-local");
 //==========================================

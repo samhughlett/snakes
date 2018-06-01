@@ -104,21 +104,12 @@ const middle = require('../middleware');
     });
     
     router.get("/snake/:id/edit", middle.loggedIn, function(req, res){
-        Snake.findById(req.params.id, async function(err, foundSnake){
+        Snake.findById(req.params.id,function(err, foundSnake){
         if(err){
             req.flash("error", err.message);
             res.redirect("back");
         } else {
-            if (req.file) {
-               try {
-                await cloudinary.v2.uploader.destroy(foundSnake.imageId);
-                         var result = await cloudinary.v2.uploader.upload(req.file.path);
-                        foundSnake.image = result.secure_url;
-                        foundSnake.imageId = result.public_id;
-                    } catch(err) {
-                        return res.redirect("back");
-                    }
-                }
+            
                 res.render("admin/edit", {snakes: foundSnake});
             }
         });
@@ -128,6 +119,16 @@ const middle = require('../middleware');
             if (err){
                 res.render("error");
             }else{
+                if(req.file){
+                    try{
+                    await cloudinary.v2.uploader.destroy(updatedSnake.imageId);
+                    var result = await cloudinary.v2.uploader.upload(req.file.path);
+                    updatedSnake.imageId = result.public_id;
+                    updatedSnake.image = result.secure_url;
+                    } catch (err){
+                        return res.redirect('error');
+                    }
+                }
                 res.redirect("/snake/admin");
             }
         });

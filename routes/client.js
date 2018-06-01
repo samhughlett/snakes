@@ -77,11 +77,9 @@ router.get("/signup", function(req, res){
 });
 
 router.post("/snake/signup", function(req, res){
-    req.body.username;
-    req.body.password;
+//console.log -here is really not good for security.
+//as it could show sinsitive information.
     var newUser = new User({username: req.body.username, email: req.body.email});
-            console.log(req.body.password);
-        console.log(req.body.username);
     User.register(newUser, req.body.password, function(err, user){
         if(err){
             console.log(err);
