@@ -11,6 +11,7 @@ const
                 username: String,
                 password: String,
                 email: String,
+                phone: String,
                 isAdmin: {type: Boolean, default: false},
                 isOwner: {type: Boolean, default:false},
                 isFavUser: {type: Boolean, default:false}

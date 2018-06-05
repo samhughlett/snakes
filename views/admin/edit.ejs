@@ -15,33 +15,33 @@
     
     <div class="ui main text container big inverted form segment">
     <div class="ui huge header">Edit this: <%=snakes.type%></div>
-          <form class="center container"action="/snake" method="post"enctype="multipart/form-data">
+          <form class="center container" action="/snake/<%=snakes._id%>?_method=PUT" method="POST"enctype="multipart/form-data">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="snake[type]">Type of snake</label>
-                <input type="text" class="form-control" name="snake[type]" pattern=".{3,}" value="<%=snakes.type%>"></input>
+                <input type="text" class="form-control" name="type" pattern=".{3,}" value="<%=snakes.type%>"></input>
             </div>
             <div class="form-group col-md-6">
                 <label for="snake[price]">Price of snake</label>
-                <input type="text" class="form-control" name="snake[price]" pattern=".{3,}"  value="<%=snakes.price%>"></input>
+                <input type="text" class="form-control" name="price" pattern=".{3,}"  value="<%=snakes.price%>"></input>
             </div>
             <div class="form-group col-md-6">
                 <label for="image">Image of snake</label>
-                <input type="file" class="form-control" id="image" name="image" accept="image/*" value="<%=snakes.image%>"></input>
+                <input type="file" class="form-control" id="image" name="image" accept="image/*"></input>
             </div>
             <div class="form-group col-md-6">
                 <label>sex of snake</label>
-                <select name="snake[sex]" class="form-control" pattern=".{1,}"  value="snakes.sex">
+                <select name="sex" class="form-control" pattern=".{1,}"  value="snakes.sex">
                     <option selected><%=snakes.sex%></option>
                     <option>Male</option>
                     <option>Female</option>
                 </select>
             </div>
             <div class="form-group col-md-12">
-                <label for="snake[discrip]">Discription of the snake</label>
-                <textarea name="snake[discrip]" class="form-control"  pattern=".{3,}" wrap="soft" ><%=snakes.discrip%></textarea>
+                <label for="discrip">Discription of the snake</label>
+                <textarea name="discrip" class="form-control"  pattern=".{3,}" wrap="soft" ><%=snakes.discrip%></textarea>
             </div>
-                <button class="btn btn-success center" type="submit">Add to site</button>
+                <button class="btn btn-success center" type="submit">Post Edited Snake</button>
         </div>
     </form>
     </div>
