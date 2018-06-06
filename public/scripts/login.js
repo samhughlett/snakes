@@ -8,3 +8,5 @@ const    signup      = document.getElementById(signup);
     passwordtest.addEventListener("keyup", function(){
         alert("key up");
     });
+    
+    
