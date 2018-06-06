@@ -23,11 +23,11 @@ const
 //          CLIENT VIEWABLE ROUTES
 //==========================================
     router.get("/snake/users/:id", function(req, res){
-        res.render("client/profile")
+        res.render("client/profile");
     });
     
     router.get("/aboutus", function(req, res){
-        res.render("client/aboutus")
+        res.render("client/aboutus");
     });
 
     router.get("/snake", function(req, res){
@@ -91,3 +91,4 @@ router.post("/snake/signup", function(req, res){
         });
     });
 module.exports = router;
+
