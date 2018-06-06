@@ -17,5 +17,6 @@ const  snakeSchema  = new mongoose.Schema({
         sex: String
     });
     
+    
 
 module.exports = mongoose.model("Snake", snakeSchema);
