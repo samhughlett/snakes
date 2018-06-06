@@ -118,7 +118,7 @@ const   middle  = require('../middleware'),
     router.put("/snake/:id", upload.single('image'), (req, res) =>{
         Snake.findById(req.params.id, async function(err, updatedSnake){
             if (err){
-                res.redirect("/");
+                res.redirect("error");
             }else{
                 if(req.file){
                     try {
@@ -127,7 +127,7 @@ const   middle  = require('../middleware'),
                         updatedSnake.image = result.secure_url;
                         updatedSnake.imageId = result.public_id; 
                     } catch(err) {
-                        return res.redirect('/');
+                        return res.redirect('error');
                     }
                 }
                 updatedSnake.type = req.body.type;
