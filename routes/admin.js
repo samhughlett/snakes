@@ -118,17 +118,16 @@ const   middle  = require('../middleware'),
     router.put("/snake/:id", upload.single('image'), (req, res) =>{
         Snake.findById(req.params.id, async function(err, updatedSnake){
             if (err){
-                res.render("error");
+                res.redirect("/");
             }else{
                 if(req.file){
-                    try{
-                    await cloudinary.v2.uploader.destroy(updatedSnake.imageId);
-                    var result =  await cloudinary.v2.uploader.upload(req.file.path,);
-                        req.body.image = result.secure_url;
-                        req.body.imageId = result.public_id; 
-                        return res.redirect('error');
-                    } catch (err){
-
+                    try {
+                        await cloudinary.v2.uploader.destroy(updatedSnake.imageId);
+                        var result =  await cloudinary.v2.uploader.upload(req.file.path);
+                        updatedSnake.image = result.secure_url;
+                        updatedSnake.imageId = result.public_id; 
+                    } catch(err) {
+                        return res.redirect('/');
                     }
                 }
                 updatedSnake.type = req.body.type;
@@ -137,6 +136,7 @@ const   middle  = require('../middleware'),
                 updatedSnake.sex = req.body.sex;
                 updatedSnake.traits = req.body.traits;
                 updatedSnake.save();
+                res.redirect(`/snake/${req.params.id}`)
             }
         });
     });
